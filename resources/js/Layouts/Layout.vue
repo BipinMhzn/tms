@@ -19,7 +19,7 @@ defineProps({
 })
 
 const logout = () => {
-    router.post(route('logout'));
+    router.post(route('/logout'));
 };
 </script>
 
@@ -27,65 +27,67 @@ const logout = () => {
     <Head :title="title"></Head>
     <!-- Navigation Bar -->
     <nav class="bg-white shadow p-4">
-        <div class="flex">
-            <div class="flex-1 w-64 border-black">
+        <div class="flex flex-row">
+            <div class="basis-4/5 border-black">
                 <a href="/" class="font-bold text-xl text-indigo-800">Movie Tickets</a>
             </div>
 
-            <div v-if="auth.user">
+            <div v-if="auth.user" class="basis-1/5 text-right">
                 <Dropdown>
                     <template #trigger>
-                        <div class="flex-none w-44">
-                            <div class="inline-flex rounded-md">
-                                <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 transition ease-in-out duration-150">
-                                    {{ auth.user.name }}
-                                    <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                        <button type="button"
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 transition ease-in-out duration-150">
+                            {{ auth.user.name }}
+                            <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                            </svg>
+                        </button>
                     </template>
 
                     <template #content>
-                        <!-- Account Management -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                            Manage Account
-                        </div>
+                        <div class="text-left">
+                            <!-- Account Management -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                Manage Account
+                            </div>
 
-                        <DropdownLink :href="route('profile.show')">
-                            Profile
-                        </DropdownLink>
-
-                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
-                            API Tokens
-                        </DropdownLink>
-
-                        <div class="border-t border-gray-200"/>
-
-                        <!-- Authentication -->
-                        <form @submit.prevent="logout">
-                            <DropdownLink as="button">
-                                Log Out
+                            <DropdownLink :href="route('profile.show')">
+                                Profile
                             </DropdownLink>
-                        </form>
+
+                            <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
+                                API Tokens
+                            </DropdownLink>
+
+                            <div class="border-t border-gray-200"/>
+                            <DropdownLink :href="route('manage.dashboard')">
+                                Admin Panel
+                            </DropdownLink>
+                            <div class="border-t border-gray-200"/>
+
+                            <!-- Authentication -->
+                            <form @submit.prevent="logout">
+                                <DropdownLink as="button">
+                                    Log Out
+                                </DropdownLink>
+                            </form>
+                        </div>
                     </template>
 
                 </Dropdown>
             </div>
 
-            <div v-else class="inline-flex">
+            <div v-else class="basis-1/5 text-right">
                 <div class="flex-none w-20">
-                    <Link href="login"
+                    <Link href="/login"
                           class="text-indigo-600 hover:text-white hover:bg-indigo-600 px-3 pt-2 pb-3 rounded-md text-sm font-medium">
                         Sign In
                     </Link>
                 </div>
                 <div class="flex-none w-20">
-                    <Link href="register"
+                    <Link href="/register"
                           class="text-indigo-600 hover:text-white hover:bg-indigo-600 px-3 pt-2 pb-3 rounded-md text-sm font-medium">
                         Register
                     </Link>

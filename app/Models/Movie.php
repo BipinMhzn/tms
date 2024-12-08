@@ -35,6 +35,10 @@ class Movie extends Model
         'thumbnail_url' => 'thumbnailUrl',
     ];
 
+    protected $hidden = [
+        'deleted_at',
+    ];
+
     protected static function newFactory(): MovieFactory
     {
         return MovieFactory::new();

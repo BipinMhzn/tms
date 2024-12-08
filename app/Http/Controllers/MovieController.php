@@ -14,4 +14,9 @@ class MovieController extends Controller
 
         return Inertia::render('Movie/Index', ['movies' => $movies]);
     }
+
+    public function show(Movie $movie): Response
+    {
+        return Inertia::render('Movie/Show', ['movie' => $movie]);
+    }
 }

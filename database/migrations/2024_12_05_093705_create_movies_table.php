@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('languages');
             $table->string('genre', 20);
             $table->string('rating', 5);
-            $table->string('thumbnail_url');
+            $table->string('thumbnail_url', 500);
+            $table->integer('duration')->unsigned();
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();

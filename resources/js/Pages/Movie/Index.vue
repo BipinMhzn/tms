@@ -23,15 +23,15 @@ defineProps({
     <div class="mt-4">
         <div class="shadow p-4">
             <div class="text-3xl font-bold mb-4">
-                Running Movies
+                Now Showing
             </div>
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="movie in movies">
-                    <Link class="w-full">
+                    <Link class="w-full" :href="route('movies.detail', [movie.id])">
                         <div>
                             <img
                                 class="rounded-lg"
-                                v-bind:src="movie.title">
+                                :src="movie.thumbnail_url">
                         </div>
                         <div class="mt-4 text-xl font-bold text-gray-900 overflow-hidden whitespace-nowrap max-w-full truncate">
                             {{ movie.title }}

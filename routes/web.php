@@ -12,7 +12,7 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'movies' => Movie::all()
+        'movies' => Movie::query()->limit(4)->get(),
     ]);
 });
 
@@ -24,6 +24,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('manage/dashboard', function () {
+        return Inertia::render('Manage/Dashboard');
+    })->name('manage.dashboard');
 });
 
 // movies
@@ -38,4 +42,5 @@ Route::group([
     'prefix' => 'movies',
 ], function () {
     Route::get('/', [MovieController::class, 'index'])->name('movies.index');
+    Route::get('/{movie}', [MovieController::class, 'show'])->name('movies.detail');
 })->whereNumber('movie');
