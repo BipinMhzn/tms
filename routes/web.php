@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\Manage\MovieController as ManageMovieController;
+use App\Http\Controllers\Manage\CinemaController as ManageCinemaController;
+use App\Http\Controllers\Manage\UserController as ManageUserController;
 use App\Models\Movie;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +38,21 @@ Route::group([
     'middleware' => ['auth:sanctum', 'verified'],
     'prefix' => 'manage/movies',
 ], function () {
-    Route::get('/', [MovieController::class, 'index'])->name('manage.movies.index');
+    Route::get('/', [ManageMovieController::class, 'index'])->name('manage.movies.index');
+})->whereNumber('movie');
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'verified'],
+    'prefix' => 'manage/cinemas',
+], function () {
+    Route::get('/', [ManageCinemaController::class, 'index'])->name('manage.cinemas.index');
+})->whereNumber('cinema');
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'verified'],
+    'prefix' => 'manage/users',
+], function () {
+    Route::get('/', [ManageUserController::class, 'index'])->name('manage.users.index');
 })->whereNumber('movie');
 
 Route::group([
