@@ -6,11 +6,13 @@ use App\Enums\Movie\MovieGenreEnum;
 use App\Enums\Movie\MovieRatingEnum;
 use Database\Factories\MovieFactory;
 use Ensue\Snap\Foundation\Database\SnapModel;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Movie extends SnapModel
 {
     use HasFactory;
+    use HasUuids;
 
     protected $fillable = [
         'title',

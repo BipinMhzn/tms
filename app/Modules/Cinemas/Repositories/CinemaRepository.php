@@ -18,9 +18,9 @@ final class CinemaRepository extends SnapRepository implements CinemaInterface
      * CinemaRepository constructor.
      * @param Cinema $model
      */
-    public function __construct(Cinema $model)
+    public function __construct(private Cinema $cinema)
     {
-        parent::__construct($model);
+        parent::__construct($cinema);
     }
 
     /**
@@ -32,4 +32,32 @@ final class CinemaRepository extends SnapRepository implements CinemaInterface
         return new CinemasFilter($builder);
     }
 
+    public function createCinema(array $attributes): Cinema
+    {
+        $model = $this->cinema->newInstance();
+        $model->fill($attributes);
+        $model->save();
+
+        return $model;
+    }
+
+    public function updateCinema(int $cinemaId, array $attributes)
+    {
+        dd($cinemaId);
+    }
+
+    public function destroyCinema(int $cinemaId)
+    {
+        // TODO: Implement destroyCinema() method.
+    }
+
+    public function getCinemaById(int $cinemaId): Cinema
+    {
+        return $this->model->newQuery()->findOrFail($cinemaId);
+    }
+
+    public function toggleCinemaStatus(int $cinemaId)
+    {
+        // TODO: Implement toggleCinemaStatus() method.
+    }
 }

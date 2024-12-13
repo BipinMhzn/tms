@@ -14,9 +14,13 @@ final class CinemaCreateRequest extends SnapRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'location' => ['required', 'string'],
-            'status' => ['required', 'string'],
+            'title' => ['required', 'string', 'max:250'],
+            'description' => ['nullable', 'string', 'max:250'],
+            'location' => ['required', 'string', 'max:250'],
+            'status' => ['required', 'boolean'],
+            'halls' => ['required', 'array'],
+            'halls.*.title' => ['required', 'string', 'max:250'],
+            'halls.*.status' => ['required', 'boolean'],
         ];
     }
 }

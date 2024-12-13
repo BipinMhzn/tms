@@ -5,12 +5,19 @@ export default {
     layout: AdminLayout
 }
 </script>
+
 <script setup>
 
+defineProps({
+   cinemas: {
+       type: Object,
+       required: true,
+   },
+});
 </script>
 
 <template>
- Cinema
+ Cinema Hello
 </template>
 
 <style scoped>

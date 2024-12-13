@@ -31,7 +31,7 @@ final class CinemasController extends SnapController
      */
     public function index(SnapRequest $request): Response
     {
-        return Inertia::render('Manage/Cinema/Index', ['movies' => $this->repository->getList($request->all())]);
+        return Inertia::render('Manage/Cinema/Index', ['cinemas' => $this->repository->getList($request->validated())]);
     }
 
     /**
@@ -40,9 +40,9 @@ final class CinemasController extends SnapController
      */
     public function store(CinemaCreateRequest $request): RedirectResponse
     {
-        $this->repository->create($request->validated());
+        $this->repository->createCinema($request->validated());
 
-        return to_route('manage.cinemas.index')->with('success', 'Cinema created.');
+        return to_route('manage.cinemas.index')->with('success', 'Cinema created successfully.');
     }
 
     /**
@@ -52,9 +52,9 @@ final class CinemasController extends SnapController
      */
     public function update(CinemaUpdateRequest $request, int $cinema): RedirectResponse
     {
-        $this->repository->update($cinema, $request->validated());
+        $this->repository->updateCinema($cinema, $request->validated());
 
-        return to_route('manage.cinemas.index')->with('success', 'Cinema updated.');
+        return to_route('manage.cinemas.index')->with('success', 'Cinema updated successfully.');
     }
 
     /**
@@ -63,9 +63,9 @@ final class CinemasController extends SnapController
      */
     public function destroy(int $cinema): RedirectResponse
     {
-        $this->repository->destroy($cinema);
+        $this->repository->destroyCinema($cinema);
 
-        return to_route('manage.cinemas.index')->with('success', 'Cinema deleted.');
+        return to_route('manage.cinemas.index')->with('success', 'Cinema deleted successfully.');
     }
 
     /**
@@ -74,17 +74,17 @@ final class CinemasController extends SnapController
      */
     public function show(int $cinema): Response
     {
-        return Inertia::render('Manage/Cinema/Show', ['movie' => $this->repository->getById($cinema)]);
+        return Inertia::render('Manage/Cinema/Show', ['cinema' => $this->repository->getCinemaById($cinema)]);
     }
 
     /**
      * @param int $cinema
      * @return RedirectResponse
      */
-    public function toggleStatus(int $cinema): RedirectResponse
+    public function status(int $cinema): RedirectResponse
     {
-        $this->repository->toggleStatus($cinema);
+        $this->repository->toggleCinemaStatus($cinema);
 
-        return to_route('manage.cinemas.index')->with('success', 'Cinema deleted.');
+        return to_route('manage.cinemas.index')->with('success', 'Cinema status updated successfully.');
     }
 }
