@@ -63,7 +63,7 @@ const sideNavMenuItems = [
     <SideNav :menuItems="sideNavMenuItems"></SideNav>
 
     <div class="p-4 sm:ml-64 dark:bg-gray-900 dark:text-white">
-        <div class="p-4 mt-14">
+        <div class="mt-14">
             <slot>
             </slot>
         </div>

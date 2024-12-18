@@ -8,7 +8,7 @@ export default {
 
 <script setup>
 import {Head} from "@inertiajs/vue3";
-import {onBeforeMount, onMounted, ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 import CreateCinema from "@/Pages/Manage/Cinema/CreateCinema.vue";
 import ListCinema from "@/Pages/Manage/Cinema/ListCinema.vue";
 
@@ -31,7 +31,6 @@ const addCinemaForm = ref(false);
 
 onBeforeMount(() => {
     if (props.showAdd) {
-        console.log(props.showAdd);
         addCinemaForm.value = props.showAdd;
     }
 })
@@ -51,12 +50,13 @@ const toggleAddCinemaForm = () => {
 <template>
     <Head title="Manage Cinema"></Head>
     <div class="items-center">
-        <div class="flex p-2 my-4">
-            <h1 class="basis-11/12 text-3xl font-bold">Cinemas</h1>
+        <div class="flex justify-between p-2 my-4">
+            <h1 class="text-3xl font-bold">Cinemas</h1>
             <button
                 @click="toggleAddCinemaForm"
-                class="basis-32 font-medium rounded-lg place-items-center bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:text-gray-800">
-                New Cinema
+                class="min-w-20 p-0 m-0 font-medium text-center bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 hover:dark:bg-gray-600 rounded-lg">
+                <span class="text-xl mr-1">+</span>
+                <span>New</span>
             </button>
         </div>
 

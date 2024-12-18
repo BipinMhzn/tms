@@ -43,6 +43,7 @@ const handleFileUpload = (event) => {
 const resetCinemaForm = () => {
     emits('hideForm');
     cinemaForm.reset();
+    cinemaForm.clearErrors();
     imagePreview.value = null;
 }
 
@@ -75,15 +76,15 @@ const showToast = (type, message) => {
     <div v-show="showForm" class="fixed top-0 left-0 z-30 w-full h-full bg-gray-100 opacity-50"></div>
     <!--        Sliding Form-->
     <div v-show="showForm"
-         class="fixed top-0 right-0 z-40 w-1/3 max-w-[500px] h-full bg-white shadow-lg border-l border-gray-300 transition-transform duration-500 transform overflow-y-auto">
+         class="fixed top-0 right-0 z-40 w-1/3 max-w-[500px] h-full bg-white shadow-lg border-l border-gray-300 dark:bg-gray-800 transition-transform duration-500 transform overflow-y-auto">
         <div class="p-4">
-            <h2 class="flex-auto text-2xl form-semibold mb-2">New Cinema</h2>
+            <h2 class="flex-auto text-2xl form-semibold mb-2 dark:text-white">New Cinema</h2>
             <div class="border border-b mb-4"></div>
             <form @submit.prevent="submitAddCinemaForm">
                 <div class="mb-4">
                     <label class="pb-2" for="title">Title</label>
                     <input type="text" v-model="cinemaForm.title"
-                           class="w-full p-2 border border-gray-300 rounded-md"
+                           class="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700"
                            name="title"/>
                     <div v-if="cinemaForm.errors.title" v-text="cinemaForm.errors.title"
                          class="text-red-500 text-xs mt-1"></div>
@@ -92,7 +93,7 @@ const showToast = (type, message) => {
                 <div class="mb-4">
                     <label class="pb-2" for="description">Description</label>
                     <textarea type="text" v-model="cinemaForm.description"
-                              class="w-full p-2 border border-gray-300 rounded-md h-56"
+                              class="w-full p-2 border border-gray-300 rounded-md h-56 dark:bg-gray-700"
                               name="description"/>
                     <div v-if="cinemaForm.errors.description" v-text="cinemaForm.errors.description"
                          class="text-red-500 text-xs mt-1"></div>
@@ -101,7 +102,7 @@ const showToast = (type, message) => {
                 <div class="mb-4">
                     <label class="pb-2" for="location">Location</label>
                     <input type="text" v-model="cinemaForm.location"
-                           class="w-full p-2 border border-gray-300 rounded-md"
+                           class="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700"
                            name="location"/>
                     <div v-if="cinemaForm.errors.location" v-text="cinemaForm.errors.location"
                          class="text-red-500 text-xs mt-1"></div>
@@ -110,9 +111,19 @@ const showToast = (type, message) => {
                 <div class="mb-4">
                     <label class="pb-2" for="thumbnail">Thumbnail</label>
                     <div class="pb-2 rounded-md">
-                        <input type="file" @change="handleFileUpload" accept="image/*" name="thumbnail"/>
-                        <div v-if="imagePreview" class="mt-2">
-                            <img :src="imagePreview" alt="Image Preview" class="w-32 h-32"/>
+                        <input type="file" @change="handleFileUpload" accept="image/*" name="thumbnail" class="hidden" ref="fileInput"/>
+                        <div
+                            class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer p-4 hover:bg-gray-200"
+                            @click="$refs.fileInput.click()"
+                        >
+                            <span v-if="!imagePreview" class="text-gray-500">Click to upload thumbnail</span>
+                            <div v-if="imagePreview">
+                                <img
+                                    :src="imagePreview"
+                                    alt="Image Preview"
+                                    class="w-full h-32 object-cover rounded-md"
+                                />
+                            </div>
                         </div>
                     </div>
                     <div v-if="cinemaForm.errors.thumbnail" v-text="cinemaForm.errors.thumbnail"

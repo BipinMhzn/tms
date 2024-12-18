@@ -62,6 +62,9 @@ defineProps({
                 </tr>
                 </tbody>
             </table>
+            <div v-if="cinemas.data.length === 0" class="py-2 w-full text-center text-gray-500 dark:text-gray-300 border-b border-l border-r border-gray-300 rounded-b-lg">
+                No data available
+            </div>
         </div>
     </div>
     <div class="border border-gray-500 p-2 my-4 place-content-center text-center">
