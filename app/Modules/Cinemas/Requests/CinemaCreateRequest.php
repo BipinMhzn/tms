@@ -18,7 +18,8 @@ final class CinemaCreateRequest extends SnapRequest
             'description' => ['nullable', 'string', 'max:250'],
             'location' => ['required', 'string', 'max:250'],
             'status' => ['required', 'boolean'],
-            'halls' => ['required', 'array'],
+            'thumbnail' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'halls' => ['nullable', 'array'],
             'halls.*.title' => ['required', 'string', 'max:250'],
             'halls.*.status' => ['required', 'boolean'],
         ];

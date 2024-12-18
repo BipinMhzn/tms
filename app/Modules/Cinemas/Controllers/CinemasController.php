@@ -6,6 +6,7 @@ use App\Modules\Cinemas\Interfaces\CinemaInterface;
 use App\Modules\Cinemas\Requests\CinemaCreateRequest;
 use App\Modules\Cinemas\Requests\CinemaUpdateRequest;
 use Ensue\Snap\Controllers\SnapController;
+use Ensue\Snap\Foundation\FileUpload\Upload;
 use Ensue\Snap\Requests\SnapRequest;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -17,6 +18,8 @@ use Inertia\Response;
  */
 final class CinemasController extends SnapController
 {
+    use Upload;
+
     /**
      * CinemasController constructor.
      * @param CinemaInterface $repository
@@ -40,7 +43,12 @@ final class CinemasController extends SnapController
      */
     public function store(CinemaCreateRequest $request): RedirectResponse
     {
-        $this->repository->createCinema($request->validated());
+        $thumbnailUrl = $this->upload($request, '/images/cinemas', true, 'thumbnail');
+        $inputs = $request->validated();
+        $inputs['thumbnail_url'] = $thumbnailUrl['path'];
+        unset($inputs['thumbnail']);
+
+        $this->repository->createCinema($inputs);
 
         return to_route('manage.cinemas.index')->with('success', 'Cinema created successfully.');
     }
