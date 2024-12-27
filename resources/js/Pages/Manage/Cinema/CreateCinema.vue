@@ -84,7 +84,7 @@ const showToast = (type, message) => {
                 <div class="mb-4">
                     <label class="pb-2" for="title">Title</label>
                     <input type="text" v-model="cinemaForm.title"
-                           class="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700"
+                           class="w-full p-2 border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600"
                            name="title"/>
                     <div v-if="cinemaForm.errors.title" v-text="cinemaForm.errors.title"
                          class="text-red-500 text-xs mt-1"></div>
@@ -93,7 +93,7 @@ const showToast = (type, message) => {
                 <div class="mb-4">
                     <label class="pb-2" for="description">Description</label>
                     <textarea type="text" v-model="cinemaForm.description"
-                              class="w-full p-2 border border-gray-300 rounded-md h-56 dark:bg-gray-700"
+                              class="w-full p-2 border border-gray-300 rounded-md h-56 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600"
                               name="description"/>
                     <div v-if="cinemaForm.errors.description" v-text="cinemaForm.errors.description"
                          class="text-red-500 text-xs mt-1"></div>
@@ -102,7 +102,7 @@ const showToast = (type, message) => {
                 <div class="mb-4">
                     <label class="pb-2" for="location">Location</label>
                     <input type="text" v-model="cinemaForm.location"
-                           class="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700"
+                           class="w-full p-2 border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600"
                            name="location"/>
                     <div v-if="cinemaForm.errors.location" v-text="cinemaForm.errors.location"
                          class="text-red-500 text-xs mt-1"></div>
@@ -113,7 +113,7 @@ const showToast = (type, message) => {
                     <div class="pb-2 rounded-md">
                         <input type="file" @change="handleFileUpload" accept="image/*" name="thumbnail" class="hidden" ref="fileInput"/>
                         <div
-                            class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer p-4 hover:bg-gray-200"
+                            class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer p-4 h-32 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600"
                             @click="$refs.fileInput.click()"
                         >
                             <span v-if="!imagePreview" class="text-gray-500">Click to upload thumbnail</span>
@@ -121,7 +121,7 @@ const showToast = (type, message) => {
                                 <img
                                     :src="imagePreview"
                                     alt="Image Preview"
-                                    class="w-full h-32 object-cover rounded-md"
+                                    class="w-full h-28 object-cover rounded-md"
                                 />
                             </div>
                         </div>
